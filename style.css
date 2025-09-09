@@ -1,4 +1,4 @@
- :root {
+:root {
      --primary: #6366f1;
      --primary-dark: #4f46e5;
      --secondary: #ec4899;
@@ -1017,3 +1017,22 @@
          font-size: 1.2rem;
      }
  }
+  .form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }

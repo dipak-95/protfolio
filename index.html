@@ -336,7 +336,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
             <div class="contact-container">
@@ -379,20 +379,24 @@
                     </div>
                 </div>
                 <div class="contact-form">
+                    <!-- Added ID for the form message and name attributes for inputs -->
+                    <div id="formMessage" class="form-message"></div>
                     <form id="contactForm"
-                        action="https://script.google.com/macros/s/AKfycbyAZ7lOTfyAxMt2XY8sPYBsMhULsrFZeMNO1akJAkX_2VFhmx4WW7JlUJgn3S_0MWxdHQ/exec"
-                        method="post">
+                        action="https://script.google.com/macros/s/AKfycby5ccstKgPHyhFzBjAap6C4H5Y8cs7bNCRlGak8VCWjr-V_4tMuYc9hFO9bbHGBEjH5uA/exec"
+                        method="POST">
+                        <!-- Add hidden field for secret token -->
+                        <input type="hidden" name="secret" value="portfolio_token_123">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subject" required>
+                            <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                            <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
                     </form>

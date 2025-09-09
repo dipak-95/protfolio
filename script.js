@@ -152,21 +152,46 @@ window.addEventListener('scroll', animateOnScroll);
 // Form Submission
 document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
-
-    // Simulate form submission
-    const btn = this.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-
+    
+    const form = this;
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
+    const formMessage = document.getElementById('formMessage');
+    
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     btn.disabled = true;
-
-    setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
-
+    formMessage.className = 'form-message';
+    
+    // Submit form data to Google Apps Script
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        mode: 'no-cors'
+    })
+    .then(() => {
+        // Since we're using no-cors, we can't read the response
+        // But we assume it was successful
+        btn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
+        formMessage.textContent = 'Thank you! Your message has been sent.';
+        formMessage.className = 'form-message success';
+        
         setTimeout(() => {
-            btn.textContent = originalText;
+            btn.innerHTML = originalText;
             btn.disabled = false;
-            this.reset();
-        }, 2000);
-    }, 1500);
+            form.reset();
+            formMessage.className = 'form-message';
+        }, 3000);
+    })
+    .catch(error => {
+        btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Try Again';
+        formMessage.textContent = 'Sorry, there was an error sending your message. Please try again.';
+        formMessage.className = 'form-message error';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            formMessage.className = 'form-message';
+        }, 3000);
+        console.error('Error:', error);
+    });
 });
